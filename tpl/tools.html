@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body>
+	<div class="container">
+		{include="page.header"}
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div class="list-group">
+					{if="!$GLOBALS['config']['OPEN_SHAARLI']"}
+					<li class="list-group-item">
+						<a href="?do=changepasswd">Mot de passe</a> - Modification du mot de passe
+					</li>
+					{/if}
+					<li class="list-group-item">
+				    	<a href="?do=configure">Configuration</a> - Changer les informations du Shaarli
+				    </li>
+				    <li class="list-group-item">
+				    	<a href="?do=changetag">Modifier les tags</a> - Renommer ou supprimer des tags
+				    </li>
+				    <li class="list-group-item">
+				    	<a href="?do=import">Importer</a> - Importer des favoris depuis votre navigateur
+				    </li>
+				    <li class="list-group-item">
+				    	<a href="?do=export">Exporter</a> - Exporter des favoris vers votre navigateur
+				    </li>
+				    <li class="list-group-item">
+						<a onclick="alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;" href="javascript:javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('{$pageabsaddr}?post='%20+%20encodeURIComponent(url)+'&amp;title='%20+%20encodeURIComponent(title)+'&amp;source=bookmarklet','_blank','menubar=no,height=390,width=600,toolbar=no,scrollbars=no,status=no,dialog=1');})();">Widget Shaarli</a> - Glissez-déposez ce lien dans votre barre de navigation. Ensuite, cliquez sur ce lien lorsque vous souhaitez ajouter un lien à votre Shaarli
+					</li>
+				</div>
+			</div>
+		</div>
+	</div>
+{include="page.footer"}
+</body>
+</html>

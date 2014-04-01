@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#list .row').each(function(i,e){
+			if (i % 2 != 0){
+				$(this).css({'background-color':'#485563','padding-top':'20px'});
+			}
+		});
+	});
+	</script>
+	<div class="container">
+	
+		{include="page.header"}
+		
+		<div class="row">
+			<div class="col-xs-2">
+				<button type="submit" class="btn btn-info btn-block" disabled="disabled">Recherche</button>
+			</div>
+			<div class="col-xs-5">
+				<form method="GET" class="form-inline" name="searchform">
+					<div class="form-group col-xs-10">
+						<input type="text" id="searchform_value" name="searchterm" class="form-control col-xs-8" style="width:100%;" placeholder="&laquo;Chat qui surfe sur une tartine&raquo;..." value="">
+					</div>
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+				</form>
+			</div>
+			<div class="col-xs-5">
+				<form method="GET" class="form-inline" name="tagfilter">
+					<div class="form-group col-xs-10">
+						<input type="text" name="searchtags" id="tagfilter_value" class="form-control col-xs-8" style="width:100%;" placeholder="Tags" value="">
+					</div>
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-tags"></span></button>
+				</form>
+			</div>
+		</div>
+		
+		<hr />
+		
+		{include="linklist.paging"}
+		
+		<div class="row">
+
+			{if="count($links)==0"}
+			
+				<div class="alert alert-danger">
+					Aucun liens.
+				</div>
+				
+			{else}
+			
+				{if="$search_type=='fulltext'"}
+				
+					<div class="alert alert-success">
+						{$result_count} resultats pour la recherche : <em>{$search_crits}</em>
+					</div>
+					
+				{/if}
+				
+				{if="$search_type=='tags'"}
+				
+					<div class="alert alert-success">
+						{$result_count} resultats pour les tags : 
+						{loop="search_crits"}
+							<a class="btn btn-sm btn-primary" href="?removetag={$value|htmlspecialchars}">
+								{$value|htmlspecialchars}
+							</a>
+						{/loop}
+					</div>
+					
+				{/if}
+				
+			{/if}
+
+		<div id="list">
+			{loop="links"}
+			<div class="row entry">
+				<div class="col-xs-11">
+					<h4><a href="{$redirector}{$value.url|htmlspecialchars}">{$value.title|htmlspecialchars}</a></h4>
+					{if="$value.description"}<blockquote><p>{$value.description}</p></blockquote>{/if}
+					<p>
+						<a href="?{$value.linkdate|smallHash}">Lien permanent</a> - 
+						{loop="value.taglist"}
+						<a class="btn btn-xs btn-success" href="?searchtags={$value|htmlspecialchars}">{$value|htmlspecialchars}</a>&nbsp;
+						{/loop}
+					</p>
+				</div>
+				<div class="col-xs-1 text-center">
+					{if="isLoggedIn()"}
+						<form method="GET">
+							<input type="hidden" name="edit_link" value="{$value.linkdate}">
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+						</form>
+						<form method="POST">
+							<input type="hidden" name="lf_linkdate" value="{$value.linkdate}">
+							<input type="hidden" name="token" value="{$token}">
+							<input type="hidden" name="delete_link">
+							<button type="submit" class="btn btn-danger" onClick="return confirmDeleteLink();"><span class="glyphicon glyphicon-pencil"></span></button>
+						</form>
+					{/if}
+					<a href="http://qrfree.kaywa.com/?l=1&s=8&d={$scripturl|urlencode}%3F{$value.linkdate|smallHash}" onclick="showQrCode(this); return false;" class="btn btn-default" data-permalink="{$scripturl}?{$value.linkdate|smallHash}">
+						<span class="glyphicon glyphicon-qrcode"></span>
+					</a>
+				</div>
+			</div>
+			
+			<hr />
+			{/loop}
+		</div>
+
+		</div>
+
+		{include="linklist.paging"}
+		
+	</div>
+
+    {include="page.footer"} 
+
+	<script language="JavaScript">
+	// Remove any displayed QR-Code
+	function remove_qrcode()
+	{ 
+		var elem = document.getElementById("permalinkQrcode");
+		if (elem) elem.parentNode.removeChild(elem);
+		return false;
+	}
+
+	// Show the QR-Code of a permalink (when the QR-Code icon is clicked).
+	function showQrCode(caller,loading=false)
+	{ 
+		// Dynamic javascript lib loading: We only load qr.js if the QR code icon is clicked:
+		if (typeof(qr)=='undefined') // Load qr.js only if not present.
+		{
+			if (!loading)  // If javascript lib is still loading, do not append script to body.
+			{
+				var element = document.createElement("script");
+				element.src = "inc/qr.min.js";
+				document.body.appendChild(element);
+			}
+			setTimeout(function() { showQrCode(caller,true);}, 200); // Retry in 200 milliseconds.
+			return false;
+		}
+
+		// Remove previous qrcode if present.
+		remove_qrcode();
+		
+		// Build the div which contains the QR-Code:
+		var element = document.createElement('div');
+		element.id="permalinkQrcode";
+		// Make QR-Code div commit sepuku when clicked:
+		if ( element.attachEvent ){ element.attachEvent('onclick', 'this.parentNode.removeChild(this);' ); } // Damn IE
+		else { element.setAttribute('onclick', 'this.parentNode.removeChild(this);' ); }
+		
+		// Build the QR-Code:
+		var image = qr.image({size: 8,value: caller.dataset.permalink});
+		if (image)
+		{ 
+			element.appendChild(image);
+			element.innerHTML+= "<br>Click to close";
+			caller.parentNode.appendChild(element);
+		}
+		else
+		{
+			element.innerHTML="Your browser does not seem to be HTML5 compatible.";
+		}
+		return false;
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body{if="ban_canLogin()"} onload="document.loginform.login.focus();"{/if}>
+    <div class="container">
+	   {include="page.header"}
+
+    	<div id="row">
+            <div class="col-xs-12">
+                {if="!ban_canLogin()"}
+                    <div class="alert alert-danger">
+                        Vous avez effectué trop de tentatives infructueuses de connexion. Réessayez plus tard.
+                    </div>
+                {else}
+                    <div class="row">
+                        <div class="col-xs-4 col-xs-offset-4 well well-small">
+                            <h3>Se connecter</h3>
+                            <form method="post" name="loginform">
+                                <div class="form-group">
+                                    <label>Utilisateur</label>
+                                    <input type="text" class="form-control" name="login" tabindex="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mot de passe</label>
+                                    <input type="password" class="form-control" name="password" tabindex="2">
+                                </div>
+                                <div class="checkbox">
+                                    <label for="longlastingsession">
+                                       <input type="checkbox" name="longlastingsession" id="longlastingsession"  tabindex="3"> Rester connecté ?
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" tabindex="4">Se connecter</button>
+                                <input type="hidden" name="token" value="{$token}">
+                                {if="$returnurl"}<input type="hidden" name="returnurl" value="{$returnurl|htmlspecialchars}">{/if}
+                            </form>
+
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+
+{include="page.footer"}
+</body>
+</html>

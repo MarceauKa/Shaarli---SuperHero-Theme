@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}
+{if="empty($GLOBALS['disablejquery'])"}<script src="inc/jquery.min.js#"></script><script src="inc/jquery-ui.min.js#"></script>{/if}
+</head>
+<body
+{if condition="$link.title==''"}onload="document.linkform.lf_title.focus();"
+{elseif condition="$link.description==''"}onload="document.linkform.lf_description.focus();"
+{else}onload="document.linkform.lf_tags.focus();"{/if} >
+<div class="container">
+	{include="page.header"}
+	<style type="text/css">
+	.ui-autocomplete {
+	  position: absolute;
+	  top: 100%;
+	  left: 0;
+	  z-index: 1000;
+	  float: left;
+	  display: none;
+	  min-width: 160px;
+	  _width: 160px;
+	  padding: 4px 0;
+	  margin: 2px 0 0 0;
+	  list-style: none;
+	  background-color: #ffffff;
+	  border-color: #ccc;
+	  border-color: rgba(0, 0, 0, 0.2);
+	  border-style: solid;
+	  border-width: 1px;
+	  -webkit-border-radius: 5px;
+	  -moz-border-radius: 5px;
+	  border-radius: 5px;
+	  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	  -webkit-background-clip: padding-box;
+	  -moz-background-clip: padding;
+	  background-clip: padding-box;
+	  *border-right-width: 2px;
+	  *border-bottom-width: 2px;
+	}
+	.ui-autocomplete .ui-menu-item > a.ui-corner-all {
+	  display: block;
+	  padding: 3px 15px;
+	  clear: both;
+	  font-weight: normal;
+	  line-height: 18px;
+	  color: #555555;
+	  white-space: nowrap;
+	}
+	.ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-hover, .ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-active {
+	  color: #ffffff;
+	  text-decoration: none;
+	  background-color: #0088cc;
+	  border-radius: 0px;
+	  -webkit-border-radius: 0px;
+	  -moz-border-radius: 0px;
+	  background-image: none;
+	}
+	</style>
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+		    <form method="post" name="linkform">
+		        <input type="hidden" name="lf_linkdate" class="form-control" value="{$link.linkdate}">
+		        <div class="form-group">
+		        	<label>URL</label>
+		        	<input type="text" name="lf_url" class="form-control" value="{$link.url|htmlspecialchars}">
+		        </div>
+		        <div class="form-group">
+		        	<label>Titre</label>
+		        	<input type="text" name="lf_title" class="form-control" value="{$link.title|htmlspecialchars}">
+		        </div>
+		        <div class="form-group">
+		        	<label>Description</label>
+		        	<textarea name="lf_description" class="form-control" rows="4">{$link.description|htmlspecialchars}</textarea>
+		        </div>
+		        <div class="form-group">
+		        	<label>Tags</label>
+		        	<input type="text" id="lf_tags" name="lf_tags" class="form-control" value="{$link.tags|htmlspecialchars}">
+		        </div>
+		        <div class="checkbox">
+		        	<label for="lf_private">
+		        	{if condition="($link_is_new && $GLOBALS['privateLinkByDefault']==true) || $link.private == true"}
+		            	<input type="checkbox" checked="checked" name="lf_private" id="lf_private"> Lien privé ?
+		            {else}
+		            	<input type="checkbox"  name="lf_private" id="lf_private"> Lien privé ?
+		            {/if}
+		            </label>
+		        </div>
+		        
+		        <button type="submit" value="Save" name="save_edit" class="btn btn-success">Sauvegarder</button>
+		        <button type="submit" value="Cancel" name="cancel_edit" class="btn btn-default">Annuler</button>
+		        {if condition="!$link_is_new"}
+		        <button type="submit" value="Delete" name="delete_link" class="btn btn-danger" onClick="return confirmDeleteLink();">Supprimer</button>
+		        {/if}
+		        <input type="hidden" name="token" value="{$token}">
+		        {if condition="$http_referer"}<input type="hidden" name="returnurl" value="{$http_referer|htmlspecialchars}">{/if}
+		    </form>
+		</div>
+	</div>
+</div>
+{include="page.footer"}
+{if="($GLOBALS['config']['OPEN_SHAARLI'] || isLoggedIn()) && empty($GLOBALS['disablejquery'])"}
+<script language="JavaScript">
+$(document).ready(function()
+{
+    $('#lf_tags').autocomplete({source:'{$source}?ws=tags',minLength:1});
+});
+</script>
+{/if}
+</body>
+</html>

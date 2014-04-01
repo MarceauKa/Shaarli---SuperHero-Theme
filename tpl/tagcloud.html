@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body>
+	
+	<div class="container">
+		{include="page.header"}
+    	
+    	<div class="row">
+    		<div class="col-xs-10 col-xs-offset-1">
+    			
+    			{loop="tags"}
+				    <a href="?searchtags={$key|htmlspecialchars}" class="label label-primary" style="font-size:100%;display:inline-block;margin-bottom:1em;">
+				    	{$key|htmlspecialchars}
+				    	<span class="label label-warning">{$value.count}</span>
+				    </a>&nbsp;
+				{/loop}
+
+    		</div>
+    	</div>
+	
+	</div>
+	
+	{include="page.footer"}
+</body>
+</html>
