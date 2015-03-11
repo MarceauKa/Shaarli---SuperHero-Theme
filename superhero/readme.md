@@ -18,12 +18,9 @@ Pré-requis
 Installation
 ----
 
-La branche "shaarli-template" suit la nouvelle façon de charger les thèmes pour votre Shaarli.
-Vous pouvez obtenir plus d'information à ce sujet en suivant cette URL : https://github.com/shaarli/Shaarli/issues/163
-
-Dans ce cas il suffit de configurer la configuration en indiquant la valeur "RAINTPL_TPL" à "superhero".
-
-Si votre Shaarli n'est pas compatible (< 0.43), suivez la branche "master" de ce thème.
+- Remplacer les fichiers /tpl du thème dans le dossier /tpl de votre Shaarli
+- Copier le dossiers /fonts à la racine de votre Shaarli
+- Ajouter les fichiers bootstrap.* dans le dossier /inc de votre Shaarli 
 
 
 Version
