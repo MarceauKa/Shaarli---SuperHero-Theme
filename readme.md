@@ -12,8 +12,7 @@ Il apporte aussi la traduction française de Shaarli.
 Pré-requis
 ----
 
-  - Shaarli >= 0.41 (le thème a été conçu sur cette version)
-  - jQuery >= 1.7.1 (vient avec Shaarli)
+  - Shaarli >= 0.0.43 (le thème a été conçu sur cette version)
 
 Installation
 ----

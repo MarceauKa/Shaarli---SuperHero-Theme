@@ -12,15 +12,17 @@ Il apporte aussi la traduction française de Shaarli.
 Pré-requis
 ----
 
-  - Shaarli >= 0.41 (le thème a été conçu sur cette version)
-  - jQuery >= 1.7.1 (vient avec Shaarli)
+  - Shaarli >= 0.0.43 (le thème a été conçu sur cette version)
 
 Installation
 ----
 
-- Remplacer les fichiers /tpl du thème dans le dossier /tpl de votre Shaarli
-- Copier le dossiers /fonts à la racine de votre Shaarli
-- Ajouter les fichiers bootstrap.* dans le dossier /inc de votre Shaarli 
+La branche "shaarli-template" suit la nouvelle façon de charger les thèmes pour votre Shaarli.
+Vous pouvez obtenir plus d'information à ce sujet en suivant cette URL : https://github.com/shaarli/Shaarli/issues/163
+
+Dans ce cas il suffit de configurer la configuration en indiquant la valeur "RAINTPL_TPL" à "superhero".
+
+Si votre Shaarli n'est pas compatible (< 0.43), suivez la branche "master" de ce thème.
 
 
 Version
