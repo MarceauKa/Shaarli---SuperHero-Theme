@@ -12,17 +12,17 @@
         </div>
         
         <div class="row well well-small">
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-sm-4">
                 <button class="btn btn-primary btn-block" disabled="disabled">{$day}</button>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-6 col-sm-4">
                 {if="$previousday"}
                     <a class="btn btn-block btn-warning" href="?do=daily&day={$previousday}">Jour précédent</a>
                 {else}
                     <a href="#" class="btn btn-block btn-warning" disabled="disabled">Jour précédent</a>
                 {/if}
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-6 col-sm-4">
                 {if="$nextday"}
                     <a class="btn btn-block btn-warning" href="?do=daily&day={$nextday}">Jour suivant</a>
                 {else}
@@ -33,7 +33,7 @@
 
         <div class="row">
             {if="$linksToDisplay"}
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-4">
                 {loop="col1"}
                     <h5><a href="{$value.url}">{$value.title|htmlspecialchars}</a></h5>
                     {if="$value.formatedDescription"}
@@ -42,7 +42,7 @@
                     <hr />
                 {/loop}
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-4">
                 {loop="col2"}
                     <h5><a href="{$value.url}">{$value.title|htmlspecialchars}</a></h5>
                     {if="$value.formatedDescription"}
@@ -51,7 +51,7 @@
                     <hr />
                 {/loop}
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-4">
                 {loop="col3"}
                     <h5><a href="{$value.url}">{$value.title|htmlspecialchars}</a></h5>
                     {if="$value.formatedDescription"}
