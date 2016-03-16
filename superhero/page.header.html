@@ -15,25 +15,25 @@
 	  <ul class="nav navbar-nav">
 		{if="isLoggedIn()"}
 		<li class="dropdown">
-		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-lock"></span> Admin <b class="caret"></b></a>
+		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lock"></i> Admin <b class="caret"></b></a>
 		  <ul class="dropdown-menu" role="menu">
-			<li><a href="?do=addlink"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter un lien</a></li>
-			<li><a href="?do=tools"><span class="glyphicon glyphicon-cog"></span> Outils</a></li>
-			<li><a href="?do=logout"><span class="glyphicon glyphicon-off"></span> Déconnexion</a></li>
+			<li><a href="?do=addlink"><i class="fa fa-plug"></i> Ajouter un lien</a></li>
+			<li><a href="?do=tools"><i class="fa fa-cog"></i> Outils</a></li>
+			<li><a href="?do=logout"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
 		  </ul>
 		</li>
 		{else}
-		<li><a href="?do=login"><span class="glyphicon glyphicon-user"></span> Se connecter</a></li>
+		<li><a href="?do=login"><i class="fa fa-user"></i> Se connecter</a></li>
 		{/if}
 		<li class="dropdown">
-		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-link"></span> Flux <b class="caret"></b></a>
+		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-rss"></i>Flux <b class="caret"></b></a>
 		  <ul class="dropdown-menu" role="menu">
-			<li><a href="{$feedurl}?do=rss{$searchcrits}"><span class="glyphicon glyphicon-pushpin"></span> RSS</a></li>
-			<li><a href="{$feedurl}?do=atom{$searchcrits}"><span class="glyphicon glyphicon-pushpin"></span> ATOM</a></li>
+			<li><a href="{$feedurl}?do=rss{$searchcrits}"><i class="fa fa-rss-square"></i> RSS</a></li>
+			<li><a href="{$feedurl}?do=atom{$searchcrits}"><i class="fa fa-rss-square"></i> ATOM</a></li>
 		  </ul>
 		</li>
-		<li><a href="?do=tagcloud"><span class="glyphicon glyphicon-tags"></span> Tags</a></li>
-		<li><a href="?do=daily"><span class="glyphicon glyphicon-globe"></span> Quotidien</a></li>
+		<li><a href="?do=tagcloud"><i class="fa fa-tags"></i> Tags</a></li>
+		<li><a href="?do=daily"><i class="fa fa-sun-o"></i> Quotidien</a></li>
 	  </ul>
 	  <p class="navbar-text navbar-right">{$linkcount} liens</p>
 	  <form class="navbar-form navbar-right" role="search">

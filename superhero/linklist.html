@@ -24,7 +24,7 @@
 					<div class="form-group col-xs-10">
 						<input type="text" id="searchform_value" name="searchterm" class="form-control col-xs-8" style="width:100%;" placeholder="&laquo;Chat qui surfe sur une tartine&raquo;..." value="">
 					</div>
-					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+					<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
 				</form>
 			</div>
 			<div class="col-xs-12 col-sm-5">
@@ -32,7 +32,7 @@
 					<div class="form-group col-xs-10">
 						<input type="text" name="searchtags" id="tagfilter_value" class="form-control col-xs-8" style="width:100%;" placeholder="Tags" value="">
 					</div>
-					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-tags"></span></button>
+					<button type="submit" class="btn btn-success"><i class="fa fa-tags"></i></button>
 				</form>
 			</div>
 		</div>
@@ -91,17 +91,17 @@
 					{if="isLoggedIn()"}
 						<form method="GET">
 							<input type="hidden" name="edit_link" value="{$value.linkdate}">
-							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-trash"></i></button>
 						</form>
 						<form method="POST">
 							<input type="hidden" name="lf_linkdate" value="{$value.linkdate}">
 							<input type="hidden" name="token" value="{$token}">
 							<input type="hidden" name="delete_link">
-							<button type="submit" class="btn btn-danger" onClick="return confirmDeleteLink();"><span class="glyphicon glyphicon-pencil"></span></button>
+							<button type="submit" class="btn btn-danger" onClick="return confirmDeleteLink();"><i class="fa fa-pencil"></i></button>
 						</form>
 					{/if}
 					<a href="http://qrfree.kaywa.com/?l=1&s=8&d={$scripturl|urlencode}%3F{$value.linkdate|smallHash}" onclick="showQrCode(this); return false;" class="btn btn-default" data-permalink="{$scripturl}?{$value.linkdate|smallHash}">
-						<span class="glyphicon glyphicon-qrcode"></span>
+						<i class="fa fa-qrcode"></i>
 					</a>
 				</div>
 			</div>
