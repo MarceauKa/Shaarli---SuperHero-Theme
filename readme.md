@@ -1,6 +1,8 @@
 Shaarli - Bootstrap 3 SuperHero
 =========
 
+**Ce thème n'est plus mis à jour et n'est plus compatible avec les dernières versions de Shaarli. N'hésitez pas à jeter un oeil à [Laravel Shaarli](https://github.com/MarceauKa/laravel-shaarli) !**
+
 Kézako?
 ----
 Bootstrap 3 SuperHero est un thème pour [Shaarli] (par le génial [SebSauvage]).
